@@ -85,7 +85,7 @@ function render(variables = {}) {
 
   // set position right or left on the social media position
   let position = "";
-  variables.socialMediaPosition == null
+  variables.socialMediaPosition == "position-left"
     ? (position = `position-left`)
     : (position = `position-right`);
 
