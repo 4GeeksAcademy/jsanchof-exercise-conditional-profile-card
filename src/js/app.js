@@ -29,18 +29,78 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  //Check for name and last name and update based on the avalable data or turns back to default if just the name or last name is null
+  let name = "<h1>Lucy Melocoton</h1>";
+  if (variables.name != null) {
+    if (variables.lastName != null) {
+      name = `<h1>${variables.name} ${variables.lastName}</h1>`;
+    } else {
+      name = `<h1>${variables.name} Melocoton</h1>`;
+    }
+  } else if (variables.lastName != null) {
+    name = `<h1>Lucy ${variables.lastName}</h1>`;
+  }
+
+  // checks the role
+  let profession = "";
+  variables.role == null
+    ? (profession = "<h2>Web Developer</h2>")
+    : (profession = `<h2>${variables.role}</h2>`);
+
+  // checks the location
+  let location = "<h3>Miami, USA</h3>";
+  if (variables.city != null) {
+    if (variables.country != null) {
+      location = `<h3>${variables.city}, ${variables.country}</h3>`;
+    } else {
+      location = `<h3>${variables.city}, USA</h3>`;
+    }
+  } else if (variables.country != null) {
+    location = `<h3>Miami, ${variables.country}</h3>`;
+  }
+
+  // set and update link for Twitter
+  let twitter = "";
+  variables.twitter == null
+    ? (twitter = "https://x.com/4geeksacademy")
+    : (twitter = `https://x.com/${variables.twitter}`);
+
+  // set and update link for github
+  let github = "";
+  variables.github == null
+    ? (github = "https://github.com/4geeksacademy")
+    : (github = `https://github.com/${variables.github}`);
+
+  // set and update link for linkedIn
+  let linkedin = "";
+  variables.linkedin == null
+    ? (linkedin = "https://linkedin.com/school/4geeksacademy/")
+    : (linkedin = `https://linkedin.com/in/${variables.linkedin}`);
+
+  // set and update link for instagram
+  let insta = "";
+  variables.instagram == null
+    ? (insta = "https://instagram.com/4geeksacademy/")
+    : (insta = `https://instagram.com/${variables.instagram}`);
+
+  // set position right or left on the social media position
+  let position = "";
+  variables.socialMediaPosition == "position-left"
+    ? (position = `position-left`)
+    : (position = `position-right`);
+
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
-            ${cover}
+          ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          ${name}
+          ${profession}
+          ${location}
+          <ul class="${position}">
+            <li><a href="${twitter}"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="${github}"><i class="fab fa-github"></i></a></li>
+            <li><a href="${linkedin}"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="${insta}"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
